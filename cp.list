@@ -1,0 +1,9 @@
+data/boot/dtb/kernel_tegra210-p3448-0002-p3449-0000-b00.dtb
+data/boot/extlinux/extlinux.conf
+data/boot/kernel_tegra210-p3448-0002-p3449-0000-b00.dtb
+data/boot/kernel_tegra210-p3448-0002-p3449-0000-b00-user-custom.dtb
+data/boot/tegra210-p3448-0002-p3449-0000-b01.dtbo
+data/boot/tegra210-p3448-0003-p3542-0000.dtb
+data/boot/tegra210-p3448-common-sdmmc3.dtbo
+data/etc/nv_boot_control.conf
+data/u-boot-preboot.scr
