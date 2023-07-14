@@ -1,0 +1,127 @@
+/dts-v1/;
+
+/ {
+	overlay-name = "SDMMC3";
+	jetson-header-name = "Jetson 40pin Header";
+	compatible = "nvidia,p3542-0000+p3448-0003", "nvidia,p3449-0000-a02+p3448-0000-a02", "nvidia,p3449-0000-a01+p3448-0000-a01", "nvidia,p3449-0000-b00+p3448-0002-b00", "nvidia,jetson-nano", "nvidia,tegra210";
+
+	fragment@0 {
+		target-path = [2f 00];
+
+		__overlay__ {
+
+			sdhci@700b0400 {
+				compatible = "nvidia,tegra210-sdhci";
+				reg = <0x0 0x700b0400 0x0 0x200>;
+				interrupts = <0x0 0x13 0x4>;
+				aux-device-name = "sdhci-tegra.2";
+				iommus = <0xffffffff 0x1b>;
+				nvidia,runtime-pm-type = <0x0>;
+				clocks = <0xffffffff 0x45 0xffffffff 0xf3 0xffffffff 0x136 0xffffffff 0xc1>;
+				clock-names = "sdmmc", "pll_p", "pll_c4_out2", "sdmmc_legacy_tm";
+				resets = <0xffffffff 0x45>;
+				reset-names = "sdhci";
+				status = "okay";
+				tap-delay = <0x3>;
+				trim-delay = <0x3>;
+				mmc-ocr-mask = <0x3>;
+				max-clk-limit = <0xc28cb00>;
+				ddr-clk-limit = <0x2dc6c00>;
+				bus-width = <0x4>;
+				calib-3v3-offsets = <0x7d>;
+				calib-1v8-offsets = <0x7b7b>;
+				compad-vref-3v3 = <0x7>;
+				compad-vref-1v8 = <0x7>;
+				pll_source = "pll_p", "pll_c4_out2";
+				ignore-pm-notify;
+				cap-mmc-highspeed;
+				cap-sd-highspeed;
+				nvidia,en-io-trim-volt;
+				nvidia,en-periodic-calib;
+				cd-inverted;
+				wp-inverted;
+				pwrdet-support;
+				nvidia,min-tap-delay = <0x6a>;
+				nvidia,max-tap-delay = <0xb9>;
+				pinctrl-names = "sdmmc_schmitt_enable", "sdmmc_schmitt_disable", "sdmmc_clk_schmitt_enable", "sdmmc_clk_schmitt_disable", "sdmmc_drv_code", "sdmmc_default_drv_code", "sdmmc_e_33v_enable", "sdmmc_e_33v_disable";
+				pinctrl-0 = <0xffffffff>;
+				pinctrl-1 = <0xffffffff>;
+				pinctrl-2 = <0xffffffff>;
+				pinctrl-3 = <0xffffffff>;
+				pinctrl-4 = <0xffffffff>;
+				pinctrl-5 = <0xffffffff>;
+				pinctrl-6 = <0xffffffff>;
+				pinctrl-7 = <0xffffffff>;
+				vqmmc-supply = <0xffffffff>;
+				vmmc-supply = <0xffffffff>;
+				uhs-mask = <0x0>;
+				nvidia,vmmc-always-on;
+				no-1-8-v;
+				phandle = <0x1>;
+
+				prod-settings {
+					#prod-cells = <0x3>;
+
+					prod_c_ds {
+						prod = <0x100 0xff0000 0x10000 0x1e0 0xf 0x7 0x1e4 0x30077f7f 0x3000007d>;
+					};
+
+					prod_c_hs {
+						prod = <0x100 0xff0000 0x10000 0x1e0 0xf 0x7 0x1e4 0x30077f7f 0x3000007d>;
+					};
+
+					prod_c_sdr12 {
+						prod = <0x100 0xff0000 0x10000 0x1e0 0xf 0x7 0x1e4 0x30077f7f 0x30007b7b>;
+					};
+
+					prod_c_sdr25 {
+						prod = <0x100 0xff0000 0x10000 0x1e0 0xf 0x7 0x1e4 0x30077f7f 0x30007b7b>;
+					};
+
+					prod_c_sdr50 {
+						prod = <0x100 0xff0000 0x10000 0x1c0 0xe000 0x8000 0x1e0 0xf 0x7 0x1e4 0x30077f7f 0x30007b7b>;
+					};
+
+					prod_c_sdr104 {
+						prod = <0x100 0xff0000 0x10000 0x1c0 0xe000 0x4000 0x1e0 0xf 0x7 0x1e4 0x30077f7f 0x30007b7b>;
+					};
+
+					prod_c_ddr52 {
+						prod = <0x100 0x1fff0000 0x0 0x1e0 0xf 0x7 0x1e4 0x30077f7f 0x30007b7b>;
+					};
+
+					prod {
+						prod = <0x100 0x1fff000e 0x3090028 0x1c0 0x8001fc0 0x8000040 0x1c4 0x77 0x0 0x120 0x20001 0x1 0x128 0x43000000 0x0 0x1f0 0x80000 0x80000>;
+					};
+				};
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			regulator-min-microvolt = <0x325aa0>;
+		};
+	};
+
+	__symbols__ {
+		sdmmc3 = "/fragment@0/__overlay__/sdhci@700b0400";
+	};
+
+	__fixups__ {
+		smmu = "/fragment@0/__overlay__/sdhci@700b0400:iommus:0";
+		tegra_car = "/fragment@0/__overlay__/sdhci@700b0400:clocks:0", "/fragment@0/__overlay__/sdhci@700b0400:clocks:8", "/fragment@0/__overlay__/sdhci@700b0400:clocks:16", "/fragment@0/__overlay__/sdhci@700b0400:clocks:24", "/fragment@0/__overlay__/sdhci@700b0400:resets:0";
+		sdmmc3_schmitt_enable_state = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-0:0";
+		sdmmc3_schmitt_disable_state = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-1:0";
+		sdmmc3_clk_schmitt_enable_state = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-2:0";
+		sdmmc3_clk_schmitt_disable_state = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-3:0";
+		sdmmc3_drv_code_1_8V = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-4:0";
+		sdmmc3_default_drv_code_3_3V = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-5:0";
+		sdmmc3_e_33V_enable = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-6:0";
+		sdmmc3_e_33V_disable = "/fragment@0/__overlay__/sdhci@700b0400:pinctrl-7:0";
+		max77620_ldo6 = "/fragment@0/__overlay__/sdhci@700b0400:vqmmc-supply:0", "/fragment@1:target:0";
+		p3448_vdd_3v3_sd = "/fragment@0/__overlay__/sdhci@700b0400:vmmc-supply:0";
+	};
+};

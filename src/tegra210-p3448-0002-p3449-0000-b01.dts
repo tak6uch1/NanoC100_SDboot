@@ -1,0 +1,20 @@
+/dts-v1/;
+
+/ {
+	overlay-name = "Nano C100 sdmmc";
+	jetson-header-name = "Jetson 40pin Header";
+	compatible = "nvidia,p3449-0000-b00+p3448-0002-b00", "nvidia,jetson-nano", "nvidia,tegra210";
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "okay";
+			max-clk-limit = <0xc65d400>;
+		};
+	};
+
+	__fixups__ {
+		sdmmc3 = "/fragment@0:target:0";
+	};
+};
